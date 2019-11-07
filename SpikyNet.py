@@ -89,7 +89,7 @@ class Synapses(object):
         self.synapses = self.build_synapses()
         self.learning = learning                 # Indicates if change of weights will take place, and direction.
         self.I_syn = np.zeros(N_post)            # Current synaptic activity over time.
-        self.g_syn = g_syn                       # Peak current (pA) achieved by an incoming spike over the synapse.
+        self.g_syn = g_syn                       # Peak current (nS) achieved by an incoming spike over the synapse.
         self.tau_psc = tau_psc                   # Post synaptic current filter time constant (decay of peak current).
         self.tau_m = tau_m                       # Time constant (msec).
         self.Ap, self.Ad = A                     # Parameters balancing LTP and LTD.
@@ -245,7 +245,7 @@ class Model(object):
         self.learning[i][j] = learning
         self.taus_psc[i][j] = tau_psc*1e-3
         self.Synapses[i][j] = Synapses(N_pre=self.N_pop[i], N_post=self.N_pop[j], PrePost_ratio=connect_ratio, reverse=reverse, ordered=ordered,
-                                       sign=sign, g_syn=g_syn*1e-12, tau_psc=tau_psc*1e-3, tau_m=self.taus_m[j], learning=learning, mean=mean, std=std, A=A, bias=bias)
+                                       sign=sign, g_syn=g_syn*1e-9, tau_psc=tau_psc*1e-3, tau_m=self.taus_m[j], learning=learning, mean=mean, std=std, A=A, bias=bias)
 
     # Generates a noisy (Gaussian) current into a given Population.
     def add_externalCurrent(self, population, mean, std, indxs=[], I=[], N=0):
